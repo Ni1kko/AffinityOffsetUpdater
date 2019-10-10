@@ -6,7 +6,20 @@ using Newtonsoft.Json;
 namespace AffinityOffsetUpdater
 {
     public class Offsets
-    { 
+    {
+        public RootObject rootObject; 
+
+        public Offsets()
+        { 
+             
+        } 
+
+        public class RootObject
+        { 
+            public Signatures signatures { get; set; }
+            public Netvars netvars { get; set; }
+        }
+
         public class Signatures
         {
             public int clientstate_choked_commands { get; set; }
