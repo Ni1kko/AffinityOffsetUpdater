@@ -9,34 +9,30 @@ namespace AffinityOffsetUpdater
     {
         public RootObject rootObject;
         private protected static bool offsetsFetched;
-        private protected static readonly string _offsets = "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json";
+        private protected static readonly string _offsets_url = "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json";
         private protected static readonly string _offsets_out = Path.Combine(Environment.CurrentDirectory, "offsets.json");
+        private protected static byte[] _offsets = new System.Net.WebClient().DownloadData(_offsets_url);
 
-        public Offsets()
-        {
-            if (offsetsFetched) return;
+        public Offsets() => SetOffsets();
 
-            // Downloads Offsets (overwrites if file exists)
-            File.WriteAllText(_offsets_out, Encoding.UTF8.GetString(new System.Net.WebClient().DownloadData(_offsets)));
-
-            // Set offsets
-            SetOffsets();
-        }
-
+        #region Read Offsets
         private protected void SetOffsets()
         {
-            if (!File.Exists(_offsets_out)) return;
-            rootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(_offsets_out));
-            offsetsFetched = !offsetsFetched;
+            if (File.Exists(_offsets_out) && GetOffsets()) rootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(_offsets_out)); 
         }
+        #endregion
 
-        public class RootObject
+        #region Download Offsets
+        private protected bool GetOffsets()
         {
-            public int timestamp { get; set; }
-            public Signatures signatures { get; set; }
-            public Netvars netvars { get; set; }
+            if (File.Exists(_offsets_out) && offsetsFetched) return false; 
+            File.WriteAllText(_offsets_out, Encoding.UTF8.GetString(_offsets));
+            offsetsFetched = true;
+            return offsetsFetched;
         }
+        #endregion
 
+        #region Signature Offsets
         public class Signatures
         {
             public int clientstate_choked_commands { get; set; }
@@ -91,6 +87,9 @@ namespace AffinityOffsetUpdater
             public int m_yawClassPtr { get; set; }
             public int model_ambient_min { get; set; }
         }
+        #endregion
+
+        #region Netvar Offsets
         public class Netvars
         {
             public int cs_gamerules_data { get; set; }
@@ -164,6 +163,16 @@ namespace AffinityOffsetUpdater
             public int m_vecVelocity { get; set; }
             public int m_vecViewOffset { get; set; }
             public int m_viewPunchAngle { get; set; }
-        } 
+        }
+        #endregion
+
+        #region Offsets Root Object
+        public class RootObject
+        {
+            public int timestamp { get; set; }
+            public Signatures signatures { get; set; }
+            public Netvars netvars { get; set; }
+        }
+        #endregion
     }
 }
