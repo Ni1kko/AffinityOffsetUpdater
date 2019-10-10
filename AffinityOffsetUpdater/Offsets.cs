@@ -60,6 +60,80 @@ namespace AffinityOffsetUpdater
             public int m_pitchClassPtr { get; set; }
             public int m_yawClassPtr { get; set; }
             public int model_ambient_min { get; set; }
+        }
+        public class Netvars
+        {
+            public int cs_gamerules_data { get; set; }
+            public int m_ArmorValue { get; set; }
+            public int m_Collision { get; set; }
+            public int m_CollisionGroup { get; set; }
+            public int m_Local { get; set; }
+            public int m_MoveType { get; set; }
+            public int m_OriginalOwnerXuidHigh { get; set; }
+            public int m_OriginalOwnerXuidLow { get; set; }
+            public int m_SurvivalGameRuleDecisionTypes { get; set; }
+            public int m_SurvivalRules { get; set; }
+            public int m_aimPunchAngle { get; set; }
+            public int m_aimPunchAngleVel { get; set; }
+            public int m_bBombPlanted { get; set; }
+            public int m_bFreezePeriod { get; set; }
+            public int m_bGunGameImmunity { get; set; }
+            public int m_bHasDefuser { get; set; }
+            public int m_bHasHelmet { get; set; }
+            public int m_bInReload { get; set; }
+            public int m_bIsDefusing { get; set; }
+            public int m_bIsQueuedMatchmaking { get; set; }
+            public int m_bIsScoped { get; set; }
+            public int m_bIsValveDS { get; set; }
+            public int m_bSpotted { get; set; }
+            public int m_bSpottedByMask { get; set; }
+            public int m_clrRender { get; set; }
+            public int m_dwBoneMatrix { get; set; }
+            public int m_fAccuracyPenalty { get; set; }
+            public int m_fFlags { get; set; }
+            public int m_flC4Blow { get; set; }
+            public int m_flDefuseCountDown { get; set; }
+            public int m_flDefuseLength { get; set; }
+            public int m_flFallbackWear { get; set; }
+            public int m_flFlashDuration { get; set; }
+            public int m_flFlashMaxAlpha { get; set; }
+            public int m_flNextPrimaryAttack { get; set; }
+            public int m_flTimerLength { get; set; }
+            public int m_hActiveWeapon { get; set; }
+            public int m_hMyWeapons { get; set; }
+            public int m_hObserverTarget { get; set; }
+            public int m_hOwner { get; set; }
+            public int m_hOwnerEntity { get; set; }
+            public int m_iAccountID { get; set; }
+            public int m_iClip1 { get; set; }
+            public int m_iCompetitiveRanking { get; set; }
+            public int m_iCompetitiveWins { get; set; }
+            public int m_iCrosshairId { get; set; }
+            public int m_iEntityQuality { get; set; }
+            public int m_iFOV { get; set; }
+            public int m_iFOVStart { get; set; }
+            public int m_iGlowIndex { get; set; }
+            public int m_iHealth { get; set; }
+            public int m_iItemDefinitionIndex { get; set; }
+            public int m_iItemIDHigh { get; set; }
+            public int m_iObserverMode { get; set; }
+            public int m_iShotsFired { get; set; }
+            public int m_iState { get; set; }
+            public int m_iTeamNum { get; set; }
+            public int m_lifeState { get; set; }
+            public int m_nFallbackPaintKit { get; set; }
+            public int m_nFallbackSeed { get; set; }
+            public int m_nFallbackStatTrak { get; set; }
+            public int m_nForceBone { get; set; }
+            public int m_nTickBase { get; set; }
+            public int m_rgflCoordinateFrame { get; set; }
+            public int m_szCustomName { get; set; }
+            public int m_szLastPlaceName { get; set; }
+            public int m_thirdPersonViewAngles { get; set; }
+            public int m_vecOrigin { get; set; }
+            public int m_vecVelocity { get; set; }
+            public int m_vecViewOffset { get; set; }
+            public int m_viewPunchAngle { get; set; }
         } 
     }
 }
