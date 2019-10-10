@@ -8,20 +8,31 @@ namespace AffinityOffsetUpdater
     public class Offsets
     {
         public RootObject rootObject;
+        private protected static bool offsetsFetched;
         private protected static readonly string _offsets = "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json";
         private protected static readonly string _offsets_out = Path.Combine(Environment.CurrentDirectory, "offsets.json");
 
         public Offsets()
         {
+            if (offsetsFetched) return;
+
             // Downloads Offsets (overwrites if file exists)
             File.WriteAllText(_offsets_out, Encoding.UTF8.GetString(new System.Net.WebClient().DownloadData(_offsets)));
 
             // Set offsets
+            SetOffsets();
+        }
+
+        private protected void SetOffsets()
+        {
+            if (!File.Exists(_offsets_out)) return;
             rootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(_offsets_out));
-        } 
-          
+            offsetsFetched = !offsetsFetched;
+        }
+
         public class RootObject
         {
+            public int timestamp { get; set; }
             public Signatures signatures { get; set; }
             public Netvars netvars { get; set; }
         }
