@@ -6,29 +6,20 @@ using Newtonsoft.Json;
 namespace AffinityOffsetUpdater
 {
     public class Offsets
-    {
-        public RootObject rootObject;
-        private protected static bool offsetsFetched;
+    { 
+        public static RootObject _RootObject;
+        private protected static bool offsetsFetched = false;
         private protected static readonly string _offsets_url = "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json";
         private protected static readonly string _offsets_out = Path.Combine(Environment.CurrentDirectory, "offsets.json");
         private protected static byte[] _offsets = new System.Net.WebClient().DownloadData(_offsets_url);
 
-        public Offsets() => SetOffsets();
-
-        #region Read Offsets
-        private protected void SetOffsets()
-        {
-            if (File.Exists(_offsets_out) && GetOffsets()) rootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(_offsets_out)); 
-        }
-        #endregion
-
         #region Download Offsets
-        private protected bool GetOffsets()
+        public Offsets()
         {
-            if (File.Exists(_offsets_out) && offsetsFetched) return false; 
-            File.WriteAllText(_offsets_out, Encoding.UTF8.GetString(_offsets));
-            offsetsFetched = true;
-            return offsetsFetched;
+            if (offsetsFetched) return;
+            if (!offsetsFetched || !File.Exists(_offsets_out)) File.WriteAllText(_offsets_out, Encoding.UTF8.GetString(_offsets));
+            if (File.Exists(_offsets_out)) _RootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(_offsets_out));
+            if (!offsetsFetched) offsetsFetched = !offsetsFetched;
         }
         #endregion
 
@@ -166,7 +157,7 @@ namespace AffinityOffsetUpdater
         }
         #endregion
 
-        #region Offsets Root Object
+        #region RootObject
         public class RootObject
         {
             public int timestamp { get; set; }
